@@ -18,6 +18,7 @@ if [ ! $? -eq 0 ]
     cd ../../
     echo;echo "Installing directus..."
     helm install -f directus-values.yaml -n directus directus ./charts/directus
-    echo "Here's your credentials: admin@example.com / d1r3ctu5"
+    echo;echo "Here's your credentials: admin@example.com / d1r3ctu5"
+    echo;echo "You should point the domain directus.local to your k8s node ip!"
 fi
 echo "done."
