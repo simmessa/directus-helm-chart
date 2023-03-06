@@ -257,8 +257,12 @@ mariadb:
     ## updateStrategy for Mariadb Primary statefulset
     ## ref: https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#update-strategies
     ##
-    updateStrategy: RollingUpdate
-
+    # @SM PATCH THIS
+    # updateStrategy: RollingUpdate
+    updateStrategy:
+      type: RollingUpdate
+    # EO @SM PATCH
+    
     ## Partition update strategy for Mariadb Primary statefulset
     ## https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#partitions
     ##
