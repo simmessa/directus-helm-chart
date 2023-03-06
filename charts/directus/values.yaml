@@ -412,7 +412,7 @@ mariadb:
       ## Name of existing PVC to hold MariaDB Primary data
       ## NOTE: When it's set the rest of persistence parameters are ignored
       ##
-      existingClaim: directus-db-pvc
+      # existingClaim:
       ## Subdirectory of the volume to mount
       # subPath:
       ## Persistent Volume Storage Class
@@ -1341,7 +1341,7 @@ redis:
       ## @param master.persistence.existingClaim Use a existing PVC which must be created manually before bound
       ## NOTE: requires master.persistence.enabled: true
       ##
-      existingClaim: directus-redis-master-pvc
+      existingClaim:
     ## Redis(TM) master service parameters
     ##
     service:
@@ -1386,7 +1386,7 @@ redis:
   replica:
     ## @param replica.replicaCount Number of Redis(TM) replicas to deploy
     ##
-    replicaCount: 1
+    replicaCount: 3
     ## @param replica.configuration Configuration for Redis(TM) replicas nodes
     ## ref: https://redis.io/topics/config
     ##

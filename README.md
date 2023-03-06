@@ -23,3 +23,8 @@ sudo mkdir -p /var/dockerdata/directus/db
 sudo mkdir -p /var/dockerdata/directus/redis-master
 sudo mkdir -p /var/dockerdata/directus/redis-replica
 ```
+
+Please not the new install will then need to be done after cloning this repo via:
+```
+helm install -f myvalues.yaml directus ./charts/directus -n directus
+```
