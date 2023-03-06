@@ -8,10 +8,10 @@ if [ ! $? -eq 0 ]
         echo "check this info: https://helm.sh/docs/intro/install/"
         echo "exiting..."
     else
-    k apply -f storage
-    echo Installing pre-requisites...
-    sudo mkdir -p /var/dockerdata/directus/db /var/dockerdata/directus/redis-master /var/dockerdata/directus/redis-replica
-    sudo chmod a+w /var/dockerdata/directus/ -R
+    kubectl apply -f storage
+    echo;echo Installing pre-requisites...
+    # sudo mkdir -p /var/dockerdata/directus/db /var/dockerdata/directus/redis-master /var/dockerdata/directus/redis-replica
+    # sudo chmod a+w /var/dockerdata/directus/ -R
     helm repo add bitnami https://charts.bitnami.com/bitnami
     cd charts/directus
     helm dependency update

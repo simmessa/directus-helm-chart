@@ -1,3 +1,33 @@
+# An array to add extra environment variables
+extraEnvVars:
+- name: KEY
+  value: "1"
+- name: SECRET
+  value: "pippo!@#"
+- name: ADMIN_PASSWORD
+  value: "d1r3ctu5"
+
+# Going postgreSQL
+# DB_CLIENT="pg"
+# DB_CONNECTION_STRING="postgresql://user:password@my-database-do-user-1111-0.b.db.ondigitalocean.com:25060/defaultdb?sslmode=require"
+# DB_SSL__REJECT_UNAUTHORIZED="false"
+
+#Expose directus via ingress, requires nginx ingress in your dev kubernetes
+ingress:
+  enabled: true
+  annotations:
+    kubernetes.io/ingress.class: public
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: directus.local
+      paths:
+      - path: /
+        backend:
+          serviceName: directus
+          servicePort: 80
+        pathType: ImplementationSpecific
+  tls: []
+
 mariadb:
   enabled: true
   primary:

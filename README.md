@@ -13,33 +13,11 @@ helm repo add directus https://directus-community.github.io/helm-chart/
 ### Local install
 
 - clone this repository (TBD)
-- execute prereqs:
-```bash
-sudo mkdir -p /var/dockerdata/directus/db /var/dockerdata/directus/redis-master /var/dockerdata/directus/redis-replica
-sudo chmod a+w /var/dockerdata/directus/ -R
-cd charts/directus
-helm dependency update
-*NOTE: do we need to add bitnami repo via `helm repo add bitnami https://charts.bitnami.com/bitnami`???*
-cd ../../
-k apply -f storage
-```
 - then install with: `./install_directus.sh`
 
-## Documentation
+The script should do everything for you, my lazy friend, but yet, if you need helm debugging feel free to run:
+`helm install --dry-run --debug -f directus-values.yaml -n directus directus ./charts/directus`
+
+### Documentation
 
 Chart documentation is found in [Directus directory](charts/directus/README.md).
-
-## Extra stuff
-
-Please run the following for storage volumes:
-
-```
-sudo mkdir -p /var/dockerdata/directus/db
-sudo mkdir -p /var/dockerdata/directus/redis-master
-sudo mkdir -p /var/dockerdata/directus/redis-replica
-```
-
-Please not the new install will then need to be done after cloning this repo via:
-```
-helm install -f myvalues.yaml directus ./charts/directus -n directus
-```
