@@ -1,0 +1,54 @@
+# An array to add extra environment variables
+extraEnvVars:
+- name: KEY
+  value: "1"
+- name: SECRET
+  value: "pippo!@#"
+- name: ADMIN_PASSWORD
+  value: "d1r3ctu5"
+
+# Going postgreSQL
+# DB_CLIENT="pg"
+# DB_CONNECTION_STRING="postgresql://user:password@my-database-do-user-1111-0.b.db.ondigitalocean.com:25060/defaultdb?sslmode=require"
+# DB_SSL__REJECT_UNAUTHORIZED="false"
+
+#Expose directus via ingress, requires nginx ingress in your dev kubernetes
+ingress:
+  enabled: true
+  annotations:
+    kubernetes.io/ingress.class: public
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: directus.local
+      paths:
+      - path: /
+        backend:
+          serviceName: directus
+          servicePort: 80
+        pathType: ImplementationSpecific
+  tls: []
+
+mariadb:
+  enabled: true
+  primary:
+    ## Enable persistence using Persistent Volume Claims
+    ## ref: http://kubernetes.io/docs/user-guide/persistent-volumes/
+    ##
+    persistence:
+      ## Name of existing PVC to hold MariaDB Primary data
+      ## NOTE: When it's set the rest of persistence parameters are ignored
+      ##
+      existingClaim: directus-db-pvc
+
+redis:
+  enabled: true
+  master:
+    persistence:
+      enabled: true
+      existingClaim: directus-redis-master-pvc
+  replica:
+    replicaCount: 1
+    persistence:
+      enabled: true
+      existingClaim: directus-redis-replica-pvc
+

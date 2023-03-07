@@ -6,11 +6,13 @@ extraEnvVars:
   value: "pippo!@#"
 - name: ADMIN_PASSWORD
   value: "d1r3ctu5"
-
 # Going postgreSQL
-# DB_CLIENT="pg"
-# DB_CONNECTION_STRING="postgresql://user:password@my-database-do-user-1111-0.b.db.ondigitalocean.com:25060/defaultdb?sslmode=require"
-# DB_SSL__REJECT_UNAUTHORIZED="false"
+- name: DB_CLIENT
+  value: "pg"
+- name: DB_CONNECTION_STRING
+  value: "postgresql://directus:d1r3ctu5@directus-postgresql:5432/directus"
+- name: NODE_TLS_REJECT_UNAUTHORIZED
+  value: "0"
 
 #Expose directus via ingress, requires nginx ingress in your dev kubernetes
 ingress:
@@ -28,8 +30,26 @@ ingress:
         pathType: ImplementationSpecific
   tls: []
 
-mariadb:
+postgresql:
   enabled: true
+  auth:
+    ## @param auth.enablePostgresUser Assign a password to the "postgres" admin user. Otherwise, remote access will be blocked for this user
+    ##
+    enablePostgresUser: true
+    ## @param auth.postgresPassword Password for the "postgres" admin user. Ignored if `auth.existingSecret` is provided
+    ##
+    # postgresPassword: "diomerda"
+    ## @param auth.username Name for a custom user to create
+    ##
+    username: "directus"
+    ## @param auth.password Password for the custom user to create. Ignored if `auth.existingSecret` is provided
+    ##
+    password: "d1r3ctu5"
+    ## @param auth.database Name for a custom database to create
+    ##
+    database: "directus"
+    ## @param auth.replicationUsername Name of the replication user
+    ##  
   primary:
     ## Enable persistence using Persistent Volume Claims
     ## ref: http://kubernetes.io/docs/user-guide/persistent-volumes/
@@ -38,7 +58,20 @@ mariadb:
       ## Name of existing PVC to hold MariaDB Primary data
       ## NOTE: When it's set the rest of persistence parameters are ignored
       ##
-      existingClaim: directus-db-pvc
+      existingClaim: directus-db-postgre-pvc
+    extraEnvVars:
+    - name: POSTGRESQL_LOG_HOSTNAME
+      value: "true"
+    - name: POSTGRESQL_LOG_CONNECTIONS
+      value: "true"
+    pgHbaConfiguration: |-
+      local all all trust
+      host all all ::1/128 trust
+      host directus dir_db 10.0.0.0/8 trust
+      host all all 0.0.0.0/0 trust
+
+mariadb:
+  enabled: false
 
 redis:
   enabled: true
@@ -52,3 +85,5 @@ redis:
       enabled: true
       existingClaim: directus-redis-replica-pvc
 
+# GRANT ALL ON SCHEMA public TO directus;
+# grant all privileges on database directus to directus;
