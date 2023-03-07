@@ -4,12 +4,6 @@ This is the Community Helm Charts repository for [Directus](https://directus.io/
 
 ## Usage
 
-<!-- To install the Directus Helm charts, you need to add the following repository:
-
-```sh
-helm repo add directus https://directus-community.github.io/helm-chart/
-``` -->
-
 ### Local install
 
 - clone this repository (TBD)
