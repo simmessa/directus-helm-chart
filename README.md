@@ -19,7 +19,9 @@ git clone https://git-codecommit.eu-south-1.amazonaws.com/v1/repos/src-sw00125-h
 - then cd into it and install with: `./install_directus.sh`
 
 The script should do everything for you, my lazy friend, but yet, if you need helm debugging feel free to run:
-`helm install --dry-run --debug -f directus-values.yaml -n directus directus ./charts/directus`
+```
+helm install --dry-run --debug -f directus-values.yaml -n directus directus ./charts/directus
+```
 
 ### Documentation
 
