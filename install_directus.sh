@@ -20,6 +20,7 @@ if [ ! $? -eq 0 ]
     helm install -f directus-values.yaml -n directus directus ./charts/directus
     echo;echo "Here's your credentials: admin@example.com / d1r3ctu5"
     echo;echo "You should point the domain directus.local to your k8s node ip!"
-    echo;echo "Find out more about your WSL instance ip on powershell via: `wsl hostname -I`"
+    echo;echo "Find out more about your WSL instance ip on powershell by running: wsl hostname -I"
+    echo
 fi
 echo "done."
