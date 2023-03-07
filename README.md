@@ -23,4 +23,5 @@ The script should do everything for you, my lazy friend, but yet, if you need he
 
 ### Documentation
 
+*Note: not really relevant for RC:*
 Chart documentation is found in [Directus directory](charts/directus/README.md).
