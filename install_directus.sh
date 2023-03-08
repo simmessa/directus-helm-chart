@@ -8,7 +8,8 @@ if [ ! $? -eq 0 ]
         echo "check this info: https://helm.sh/docs/intro/install/"
         echo "exiting..."
     else
-    kubectl apply -f storage
+    kubectl create ns directus
+    kubectl apply -f storage -n directus
     echo;echo Installing pre-requisites, this will create shared directories on the assumption your current host is also your k8s dev environment...
     sudo mkdir -p /var/dockerdata/directus/db /var/dockerdata/directus/redis-master /var/dockerdata/directus/redis-replica /var/dockerdata/directus/postgresql
     sudo chmod a+w /var/dockerdata/directus/ -R
